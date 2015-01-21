@@ -19,12 +19,11 @@ and powers
 numerous [private clouds](https://www.joyent.com/products/private-cloud)
 at some of the world's largest companies.
 
-This repo provides documentation for the overall SDC project and pointers to the
-other repositories that make up a complete SDC deployment. See the [repository
-list](./docs/developer-guide/repos.md).
+This repositories provides documentation for the overall SDC project and
+pointers to the other repositories that make up a complete SDC deployment.
+See the [repository list](./docs/developer-guide/repos.md).
 
-To report bugs or request features, submit issues to the [joyent/sdc
-project](https://github.com/joyent/sdc/issues).
+Report bugs or request features here on GitHub, [joyent/sdc/issues](https://github.com/joyent/sdc/issues).
 For additional resources, you can visit the
 [Joyent Developer Center](https://www.joyent.com/developers).
 
@@ -32,7 +31,7 @@ For additional resources, you can visit the
 
 A SmartDataCenter installation consists of two or more servers. All servers run
 [SmartOS](http://smartos.org). One server acts as the management server, the
-headnode (HN), which houses the initial set of core services that drive SDC. The
+headnode, which houses the initial set of core services that drive SDC. The
 remainder are compute nodes (CNs) which run instances (virtual machines).
 
 SDC features:
@@ -40,7 +39,7 @@ SDC features:
 - SmartOS zones provides high performance container virtualization. KVM support
   on top of zones means secure full Linux and Windows guest OS support.
 - RESTful API and CLI tooling for customer self-service.
-- Complete operations portal (web GUI).
+- Complete operator portal (web app).
 - Robust and observable service oriented architecture (implemented primarily in
   Node.js).
 - Automated USB key installation.
@@ -55,8 +54,8 @@ SDC consists of the following components:
 
 For more details, see:
 
-- The [overview of SDC](https://docs.joyent.com/sdc7/overview-of-smartdatacenter-7)
-  in the SDC operator documentation.
+- The [Overview of SmartDataCenter 7](https://docs.joyent.com/sdc7/overview-of-smartdatacenter-7)
+  in the Joyent customer documentation.
 - [SmartDataCenter Architecture](./docs/developer-guide/architecture.md) for
   overall architecture.
 - [SmartDataCenter Reference](./docs/reference.md) for an
@@ -140,10 +139,8 @@ its own zone. See [the SDC operator guide](https://docs.joyent.com/sdc7).
 
 ### Installing SDC on a Physical Server
 
-A SmartDataCenter server runs SmartOS, which is a "live image". That means that
-it boots from a USB key. Installing SDC involves writing a "USB" build to
-a physical USB key, inserting the key and booting the server from that key.
-To install SDC, first obtain the latest release USB build.
+A SmartDataCenter server runs SmartOS which is a live image. This means that
+it boots from a USB flash drive (key).
 
 #### Hardware
 
@@ -157,29 +154,27 @@ For SDC development only, the minimum server hardware is:
   You'll want much more storage if you're working with images and instances.
 
 If setting up a SmartDataCenter pilot then you'll want to review
-the [SDC7 Installation Prerequisites](https://docs.joyent.com/sdc7/sdc7-installation-prerequisites)
+the [Minimum Requirements](https://docs.joyent.com/sdc7/sdc7-minimium-requirements)
+and [Installation Prerequisites](https://docs.joyent.com/sdc7/sdc7-installation-prerequisites)
 which include IPMI and at least 10 gigabit Ethernet. The supported hardware
 components for SmartOS are described in the [SmartOS Hardware Requirements](http://wiki.smartos.org/display/DOC/Hardware+Requirements).
 Joyent certified hardware for SmartDataCenter are all in
 the [Joyent Manufacturing Database](http://eng.joyent.com/manufacturing/).
 
 
-#### USB Key
-
-Download the USB key image:
+#### Install
+To install SDC, first download the latest release image:
 
 ```bash
 curl -C - -O https://us-east.manta.joyent.com/Joyent_Dev/public/SmartDataCenter/usb-latest.tgz
 ```
 
-#### Install
-
-Once you have downloaded an image, you will need to
+Once you have downloaded the latest release image, you will need to
 [write it to a USB key](https://docs.joyent.com/sdc7/installing-sdc7/creating-a-usb-key-from-a-release-tarball),
-boot the machine with it, and follow the install prompts. See the
-[installing SDC 7](https://docs.joyent.com/sdc7/installing-sdc7) and
-[install checklist](https://docs.joyent.com/sdc7/installing-sdc7/install-checklist)
-documents for information.
+boot the headnode server using the USB key, and follow the install prompts. See
+the the Joyent customer documentation "[installing SDC 7](https://docs.joyent.com/sdc7/installing-sdc7)"
+and "[install checklist](https://docs.joyent.com/sdc7/installing-sdc7/install-checklist)"
+for information.
 
 After installation, you will probably want to perform some
 [additional configuration](https://docs.joyent.com/sdc7/installing-sdc7/post-installation-configuration).
@@ -203,16 +198,16 @@ SDC is composed of several pre-built components:
   a slightly customized build of vanilla SmartOS for SDC.
 - *Virtual machine images* for SDC services (e.g. imgapi, vmapi, adminui), which
   are provisioned as VMs at install time.
-- Agents, which are bundled into a [single
+- Agents bundled into a [single
   package](https://github.com/joyent/sdc-agents-installer)
-  that can then be installed into the global zone of Compute Nodes.
+  installed into the global zone of each compute node.
 
 Each component is built separately and then all are combined into CoaL and USB
 builds (see the preceding sections) via the [sdc-headnode
-repository](https://github.com/joyent/sdc-headnode). Built components are typically
-stored in a [Manta object store](https://github.com/joyent/manta), e.g.
-[Joyent's public Manta](https://www.joyent.com/products/manta), and pulled from
-there. For example, Joyent's core builds push to
+repository](https://github.com/joyent/sdc-headnode). The built components are
+typically stored in a [Manta object store](https://github.com/joyent/manta),
+e.g. [Joyent's public Manta](https://www.joyent.com/products/manta),
+and pulled from there. For example, Joyent's master builds push to
 `/Joyent_Dev/public/builds` in Joyent's public Manta in us-east-1
 (<https://us-east.manta.joyent.com/>).
 
@@ -226,24 +221,19 @@ for details on building each of the SDC components.
 
 ## Contributing
 
-To report bugs or request features, submit issues to the [joyent/sdc
-project](https://github.com/joyent/sdc/issues). If you're contributing code,
-make a pull request to the appropriate repo (see [the repo
-overview](./docs/developer-guide/repos.md)). If you're contributing something
-substantial, you should first contact developers on the
-[sdc-discuss mailing list](mailto:sdc-discuss@lists.smartdatacenter.org)
+To report bugs or request features, submit issues here on
+GitHub, [joyent/sdc/issues](https://github.com/joyent/sdc/issues).
+If you're contributing code, make a pull request to the appropriate
+repositories (see [the repo overview](./docs/developer-guide/repos.md)).
+If you're contributing something substantial, you should first contact
+developers on the [sdc-discuss mailing list](mailto:sdc-discuss@lists.smartdatacenter.org)
 ([subscribe](https://www.listbox.com/subscribe/?list_id=247449),
-[archives](http://www.listbox.com/member/archive/247449/=now)) or **#smartos**
-on the [Freenode IRC network](https://freenode.net).
+[archives](http://www.listbox.com/member/archive/247449/=now)).
 
-For help or issues with the [Joyent
-Cloud](https://www.joyent.com/products/compute-service) or production [Manta
-service](https://www.joyent.com/products/manta), contact [Joyent Cloud customer
+For support of Joyent products and services, please contact [Joyent customer
 support](https://help.joyent.com/home) instead.
 
-SDC repositories follow the
-[Joyent Engineering
-Guidelines](https://github.com/joyent/eng/blob/master/docs/index.md).
+SDC repositories follow the [Joyent Engineering Guidelines](https://github.com/joyent/eng/blob/master/docs/index.md).
 Notably:
 
 - The #master branch should be first-customer-ship (FCS) quality at all times.
@@ -273,7 +263,7 @@ opinions are the result of many years of deploying and debugging the [Joyent
 public cloud](https://www.joyent.com/public-cloud). Design principles
 include the following:
 
-- A VM's primary storage should be a local disk, not over the network -- this
+- A VM's primary storage should be local disk, not over the network -- this
   avoids difficult to debug performance pathologies.
 - Communication between internal APIs should occur in its own control plane
   (network) that is separate from the customer networks. Avoid communicating
@@ -300,8 +290,9 @@ The goals behind the design of SDC services include:
 
 ## Dependencies and Related Projects
 
-SmartDataCenter uses [SmartOS](http://smartos.org) as the host OS. The SmartOS
-hypervisor provides both SmartOS zone (container) and KVM virtualization.
+SmartDataCenter uses [SmartOS](http://smartos.org) as the host operating
+system. The SmartOS hypervisor provides both SmartOS zone (container) and
+KVM virtualization.
 
 Joyent's open-source [Manta project](https://github.com/joyent/manta)
 is an HTTP-based object store with built-in support to run arbitrary
@@ -313,4 +304,4 @@ Manta runs on and integrates with SmartDataCenter.
 
 SmartDataCenter is licensed under the
 [Mozilla Public License version 2.0](http://mozilla.org/MPL/2.0/).
-SmartOS is [licensed separately](http://smartos.org/cddl/).
+See the file LICENSE. SmartOS is [licensed separately](http://smartos.org/cddl/).
