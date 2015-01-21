@@ -12,9 +12,9 @@
 
 SmartDataCenter (SDC) is an open-source cloud management platform, optimized
 to deliver next generation, container-based, service-oriented infrastructure
-across one or more datacenters.  With an emphasis on ease of installation
-and operation, SDC is proven at scale:  it is the software that runs
-the [Joyent public cloud](https://www.joyent.com/products/compute-service)
+across one or more data centers. With an emphasis on ease of installation
+and operation, SDC is proven at scale: it is the software that runs
+the [Joyent public cloud](https://www.joyent.com/public-cloud)
 and powers
 numerous [private clouds](https://www.joyent.com/products/private-cloud)
 at some of the world's largest companies.
@@ -39,11 +39,11 @@ SDC features:
 
 - SmartOS zones provides high performance container virtualization. KVM support
   on top of zones means secure full Linux and Windows guest OS support.
-- RESTful API and CLI tooling for customer self-service
-- Complete operations portal (web GUI)
+- RESTful API and CLI tooling for customer self-service.
+- Complete operations portal (web GUI).
 - Robust and observable service oriented architecture (implemented primarily in
-  Node.js)
-- Automated USB key installation
+  Node.js).
+- Automated USB key installation.
 
 SDC consists of the following components:
 
@@ -66,14 +66,11 @@ For more details, see:
 
 Community discussion about SmartDataCenter happens in two main places:
 
-* The *sdc-discuss* mailing list.  Once you [subscribe to the
-  list](https://www.listbox.com/subscribe/?list_id=247449), you can send mail
-  to the list address: sdc-discuss@lists.smartdatacenter.org.  The mailing list
-  archives are also [available on the
-  web](https://www.listbox.com/member/archive/247449/=now).
+* The *sdc-discuss* mailing list. Once you [subscribe to the list](https://www.listbox.com/subscribe/?list_id=247449),
+  you can send mail to the list address: sdc-discuss@lists.smartdatacenter.org.
+  The mailing list archives are also [available on the web](https://www.listbox.com/member/archive/247449/=now).
 
-* In the *#smartos* IRC channel on the [Freenode IRC
-  network](https://freenode.net/).
+* In the *#smartos* IRC channel on the [Freenode IRC network](https://freenode.net/).
 
 You can also follow [@SmartDataCenter](https://twitter.com/SmartDataCenter) on
 Twitter for updates.
@@ -88,8 +85,8 @@ full SDC headnode for development and testing.
 
 Minimum requirements: practically speaking, a good CoaL experience
 requires a **Mac** with at least **16GB** RAM and **SSD** drives. Currently, all
-core team members using CoaL are on Macs with VMware Fusion. For Linux and Windows
-**VMware Workstation should work**, but has not recently been tested.
+core team members using CoaL are on Macs with VMware Fusion. For Linux and
+Windows **VMware Workstation should work**, but has not recently been tested.
 
 1. Start the download of the latest CoaL build. The tarball is over 2GB.
 
@@ -123,7 +120,8 @@ core team members using CoaL are on Macs with VMware Fusion. For Linux and Windo
             tools\coal-windows-vmware-setup.bat
             ```
 
-See [CoaL Setup](./docs/developer-guide/coal-setup.md) for a thorough walkthrough.
+See [CoaL Setup](./docs/developer-guide/coal-setup.md) for a thorough
+walkthrough.
 
 
 After setup is complete you should be able to SSH into your CoaL on the
@@ -151,9 +149,9 @@ To install SDC, first obtain the latest release USB build.
 
 For SDC development only, the minimum server hardware is:
 
-- 8 GB USB flash drive
+- 8 GB USB flash drive.
 - Intel Processors with VT-x and EPT support (all Xeon since Nehalem).
-- 16 GB RAM
+- 16 GB RAM.
 - 6 GB available storage. Hardware RAID is not recommended.
   SDC will lay down a ZFS ZPOOL across all available disks on install.
   You'll want much more storage if you're working with images and instances.
@@ -218,12 +216,12 @@ there. For example, Joyent's core builds push to
 `/Joyent_Dev/public/builds` in Joyent's public Manta in us-east-1
 (<https://us-east.manta.joyent.com/>).
 
-You can build your own CoaL and USB on Mac or SmartOS (see the [sdc-headnode
-README](https://github.com/joyent/sdc-headnode#readme)). However, all other
-SDC components must be built using a running SDC (e.g. on the [Joyent Cloud](https://www.joyent.com/products/compute-service)
-or in a local CoaL). See [the building
-document](./docs/developer-guide/building.md) for details on building each of
-the SDC components.
+You can build your own CoaL and USB images on Mac or SmartOS (see the
+[sdc-headnode README](https://github.com/joyent/sdc-headnode#readme)). However,
+all other SDC components must be built using a running SDC
+(e.g. on the [Joyent Cloud](https://www.joyent.com/products/compute-service)
+or in a local CoaL). See [the building document](./docs/developer-guide/building.md)
+for details on building each of the SDC components.
 
 
 ## Contributing
@@ -260,20 +258,19 @@ configuration file or `JSSTYLE_FLAGS` in Makefiles in each repo for exceptions
 to the default jsstyle rules.
 
 Lint is checked with
-[javascriptlint](https://github.com/davepacheco/javascriptlint). ([Don't
-conflate lint with
-style!](http://dtrace.org/blogs/dap/2011/08/23/javascriptlint/)  There are gray
-areas, but generally speaking, style rules are arbitrary, while lint warnings
-identify potentially broken code. Repos sometimes have repo-specific lint
-rules -- look for "tools/jsl.web.conf" and "tools/jsl.node.conf" for per-repo
-exceptions to the default rules.
+[javascriptlint](https://github.com/davepacheco/javascriptlint).
+([Don't conflate lint with style!](http://dtrace.org/blogs/dap/2011/08/23/javascriptlint/)
+There are gray areas, but generally speaking, style rules are arbitrary, while
+lint warnings identify potentially broken code. Repos sometimes have
+repo-specific lint rules -- look for "tools/jsl.web.conf" and
+"tools/jsl.node.conf" for per-repo exceptions to the default rules.
 
 
-## Design principles
+## Design Principles
 
 SmartDataCenter is very opinionated about how to architect a cloud. These
 opinions are the result of many years of deploying and debugging the [Joyent
-Cloud](https://www.joyent.com/products/compute-service). Design principles
+public cloud](https://www.joyent.com/public-cloud). Design principles
 include the following:
 
 - A VM's primary storage should be a local disk, not over the network -- this
@@ -292,12 +289,12 @@ The goals behind the design of SDC services include:
 - The state of the running service should be simple to obtain.
 - The internals of the system should make it straightfoward to debug from a
   core file (from a crash or taken from a running process using
-  [gcore(1)](http://smartos.org/man/1/gcore))
+  [gcore(1)](http://smartos.org/man/1/gcore)).
 - Services should be RESTful and accept JSON unless there is a compelling
   reason otherwise.
 - Services should avoid keeping state and should not assume that there is
   only one instance of that service running. This allows multiple instances
-  of a service to be provisioned for High Availability.
+  of a service to be provisioned for high availability.
 - Node.js and C should be used for new services.
 
 
